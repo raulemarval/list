@@ -1,0 +1,37 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const itemList = document.getElementById("itemList");
+    const addItemForm = document.getElementById("addItemForm");
+    const newItemInput = document.getElementById("newItem");
+
+    // Placeholder items for demonstration purposes
+    const items = ["Item 1", "Item 2", "Item 3"];
+
+    // Function to render items
+    function renderItems() {
+        itemList.innerHTML = "";
+        items.forEach((item, index) => {
+            const listItem = document.createElement("li");
+            listItem.textContent = item;
+            listItem.addEventListener("click", () => {
+                listItem.classList.add("taken");
+            });
+            itemList.appendChild(listItem);
+        });
+    }
+
+    // Add item form submit event
+    addItemForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const newItem = newItemInput.value.trim();
+        if (newItem && items.length < 35) {
+            items.push(newItem);
+            newItemInput.value = "";
+            renderItems();
+        } else {
+            alert("You can only add up to 35 items.");
+        }
+    });
+
+    // Initial render
+    renderItems();
+});
